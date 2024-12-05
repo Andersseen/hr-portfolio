@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.tsx';
+import About from '../components/About.tsx';
+import Tech from '../components/Tech';
+import Contact from '../components/Contact.tsx';
+---
+
+<Layout title="Portfolio">
+  <main class="relative z-0">
+    <div class="bg-primary">
+      <div class="relative z-0">
+        <Hero client:load />
+        <About client:load />
+        <Tech client:load />
+        <Contact client:load />
+      </div>
+    </div>
+  </main>
+</Layout>
