@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
 import { fadeIn } from "../utils/motion";
+import Scene from "./particles/scene";
 
 const Hero = () => {
   return (
     <section className="relative w-full h-screen mx-auto">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-12 flex flex-col items-start gap-8">
+      <Scene />
+      <div className="absolute xs:top-10 top-32 w-full flex flex-col gap-8 justify-center items-center">
         <motion.div
           variants={fadeIn("down", "spring", 0.3, 0.75)}
           initial="hidden"

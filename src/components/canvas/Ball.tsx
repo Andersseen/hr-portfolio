@@ -28,7 +28,7 @@ const Ball = (props: { imgUrl: string }) => {
       <ambientLight intensity={0.25} />
       <directionalLight position={[0, 0, 0.05]} />
       <mesh castShadow receiveShadow scale={2.75}>
-        <icosahedronGeometry args={[1, 1]} />
+        <sphereGeometry args={[1, 64, 64]} />
         <meshMatcapMaterial
           color="#faf8f8"
           polygonOffset
