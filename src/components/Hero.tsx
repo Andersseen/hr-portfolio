@@ -18,12 +18,12 @@ const Hero = () => {
               Hello, I'm
             </p>
             <h1 className="font-black text-white lg:text-[80px] sm:text-[60px] xs:text-[50px] text-[40px] lg:leading-[98px] mt-2">
-              John Doe
+              Andrii Pap
             </h1>
           </div>
           <p className="text-[#dfd9ff] font-medium lg:text-[30px] sm:text-[26px] xs:text-[20px] text-[16px] lg:leading-[40px]">
-            Full Stack Developer & <br className="sm:block hidden" />
-            UI/UX Designer
+            Full Stack Developer <br className="sm:block hidden" />
+            Nx • Angular • Next • Astro • Docker
           </p>
         </motion.div>
 
@@ -33,8 +33,10 @@ const Hero = () => {
           animate="show"
           className="text-secondary text-lg max-w-3xl"
         >
-          I craft digital experiences that merge creativity with functionality,
-          specializing in modern web technologies and user-centric design.
+          I build scalable web applications and component libraries, focusing on
+          clean architecture, modern Angular, and Tailwind design systems.
+          Passionate about improving the developer experience and crafting
+          solutions that last.
         </motion.p>
       </div>
 
