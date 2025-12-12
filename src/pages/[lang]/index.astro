@@ -1,0 +1,68 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.tsx';
+import About from '../../components/About.astro';
+import Experience from '../../components/Experience.astro';
+import Tech from '../../components/Tech';
+import Footer from '../../components/Footer.astro';
+import '../../styles/global.css';
+
+import { ui, languages } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'es' } },
+    { params: { lang: 'ua' } },
+  ];
+}
+
+const { lang } = Astro.params;
+
+// Valid lang check helper
+function isValidLang(l: string | undefined): l is keyof typeof ui {
+    return l !== undefined && l in ui;
+}
+
+if (!isValidLang(lang)) {
+    throw new Error(`Invalid language: ${lang}`);
+}
+
+const t = useTranslations(lang);
+
+// Construct props for React components
+const heroT = {
+    available: t('hero.available'),
+    role: t('hero.role'),
+    titleMain: t('hero.title.main'),
+    titleHighlight: t('hero.title.highlight'),
+    desc: t('hero.desc'),
+    exp: t('hero.exp'),
+    projects: t('hero.projects'),
+    commitment: t('hero.commitment'),
+};
+
+const techT = {
+    expertise: t('tech.expertise'),
+    title: t('tech.title'),
+    desc: t('tech.desc'),
+};
+
+const titleMap = {
+    en: "Andrii Pap | Senior Full Stack Engineer",
+    es: "Andrii Pap | Ingeniero Full Stack Senior",
+    ua: "Андрій Пап | Senior Full Stack Engineer"
+};
+---
+
+<Layout title={titleMap[lang]}>
+  <div class="relative z-10 bg-neutral-900 shadow-2xl mb-[300px]">
+    <Hero client:load t={heroT} />
+    <About lang={lang} />
+    <Experience lang={lang} />
+    <Tech client:load t={techT} />
+    <div class="h-20 bg-neutral-900"></div>
+  </div>
+  <Footer lang={lang} />
+</Layout>

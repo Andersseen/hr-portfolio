@@ -1,73 +1,85 @@
 ---
 import { Icon } from 'astro-icon/components'
+import { useTranslations } from '../i18n/utils';
 
-const  services = [
+interface Props {
+  lang: 'en' | 'es' | 'ua';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const services = [
   {
-    title: "Frontend Development",
-    description: "Modern, responsive UIs with Angular, React, and Tailwind.",
+    title: t('about.leadership'),
+    description: t('about.leadership.desc'),
     icon: "layout",
   },
   {
-    title: "Backend & APIs",
-    description: "Scalable serverless services with Hono, Node.js, and Cloudflare.",
+    title: t('about.architecture'),
+    description: t('about.architecture.desc'),
     icon: "server",
   },
   {
-    title: "Component Libraries",
-    description: "Reusable UI libraries and design systems with Nx and Angular.",
+    title: t('about.delivery'),
+    description: t('about.delivery.desc'),
     icon: "boxes",
   },
   {
-    title: "Full-Stack Solutions",
-    description: "End-to-end apps from database to frontend, optimized for performance.",
+    title: t('about.frontend'),
+    description: t('about.frontend.desc'),
     icon: "code",
   },
 ];
 ---
-<section id="about" class="min-h-screen py-20 px-4">
-  <div class="group flex max-md:flex-col justify-center gap-2 w-[80%] mx-auto mb-10 mt-3">
+
+<section id="about" class="min-h-screen py-20 px-4 relative flex flex-col justify-center">
+  <div class="text-center mb-10">
+    <p class="sm:text-[18px] text-[14px] text-secondary uppercase tracking-wider">
+      {t('about.overview')}
+    </p>
+    <h2 class="text-white font-black md:text-[60px] sm:text-[50px] xs:text-[40px] text-[30px]">
+      {t('about.title')}
+    </h2>
+  </div>
+
+  <div class="group flex max-md:flex-col justify-center gap-4 w-[90%] mx-auto mb-10 mt-3 h-[450px]">
     {services.map((item) => (
-      <article class="bg-tertiary h-80 group/article relative w-full rounded-xl overflow-hidden 
-        md:group-hover:[&:not(:hover)]:w-[20%] 
-        md:group-focus-within:[&:not(:focus-within):not(:hover)]:w-[20%] 
-        transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.15)]
-        before:absolute before:inset-x-0 before:bottom-0 before:h-1/3 
-        before:bg-gradient-to-t before:from-black/50 before:transition-opacity 
-        md:before:opacity-0 md:hover:before:opacity-100 focus-within:before:opacity-100
-        after:opacity-0 md:group-hover:[&:not(:hover)]:after:opacity-100 
-        md:group-focus-within:[&:not(:focus-within):not(:hover)]:after:opacity-100
-        after:absolute after:inset-0 after:bg-white/30 after:backdrop-blur 
-        after:rounded-lg after:transition-all focus-within:ring focus-within:ring-tertiary-300">
+      <article class="bg-tertiary h-full group/article relative w-full rounded-3xl overflow-hidden 
+        md:w-[22%] md:hover:w-[40%]
+        md:group-hover:[&:not(:hover)]:w-[18%] 
+        md:group-focus-within:[&:not(:focus-within):not(:hover)]:w-[18%] 
+        transition-all duration-500 ease-[cubic-bezier(.5,.85,.25,1.15)]
+        before:absolute before:inset-x-0 before:bottom-0 before:h-2/3 
+        before:bg-gradient-to-t before:from-black/80 before:to-transparent before:transition-opacity 
+        cursor-pointer shadow-lg border border-white/5
+        hover:border-violet-500/50">
         
-        <div class="absolute inset-0 text-white z-10 p-3 flex flex-col justify-end">
-          <div class="mb-8 flex justify-center">
-         <Icon name={item.icon} />
+        {/* Background Gradient */}
+        <div class="absolute inset-0 bg-gradient-to-br from-violet-900/20 to-indigo-900/20 opacity-50 group-hover/article:opacity-100 transition-opacity duration-500"></div>
+
+        <div class="absolute inset-0 text-white z-10 p-6 flex flex-col justify-end overflow-hidden">
+          <div class="mb-auto mt-4 transform md:translate-y-8 group-hover/article:translate-y-0 transition-transform duration-500">
+             <div class="w-14 h-14 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center mb-4 text-violet-400">
+               <Icon name={item.icon} class="w-7 h-7 flex-shrink-0" />
+             </div>
           </div>
-          <h1 class="text-xl font-medium md:whitespace-nowrap md:truncate md:opacity-0 
-            group-hover/article:opacity-100 group-focus-within/article:opacity-100 
-            md:translate-y-2 group-hover/article:translate-y-0 
-            group-focus-within/article:translate-y-0 
-            transition duration-200 ease-[cubic-bezier(.5,.85,.25,1.8)] 
-            group-hover/article:delay-300 group-focus-within/article:delay-300">
-            {item.title}
-          </h1>
-          <span class="text-lg font-medium md:whitespace-nowrap md:truncate md:opacity-0 
-            group-hover/article:opacity-100 group-focus-within/article:opacity-100 
-            md:translate-y-2 group-hover/article:translate-y-0 
-            group-focus-within/article:translate-y-0 
-            transition duration-200 ease-[cubic-bezier(.5,.85,.25,1.8)] 
-            group-hover/article:delay-500 group-focus-within/article:delay-500">
-            {item.description}
-          </span>
+
+          {/* 
+            Title and Text Container 
+            Key Fix: The container is fixed width (w-[300px]) to prevent text reflow during width animation.
+          */}
+          <div class="relative min-w-[300px]"> 
+            <h3 class="text-2xl font-bold mb-2 transform md:translate-y-4 group-hover/article:translate-y-0 transition-transform duration-500 delay-75 whitespace-normal leading-tight max-w-[200px] md:group-hover/article:max-w-full transition-[max-width]">
+              {item.title}
+            </h3>
+            
+            <p class="text-secondary text-sm leading-relaxed opacity-0 md:group-hover/article:opacity-100 transform translate-y-4 md:group-hover/article:translate-y-0 transition-all duration-500 delay-100 w-[280px]">
+              {item.description}
+            </p>
+          </div>
         </div>
       </article>
     ))}
   </div>
 </section>
-
-<style>
-[data-icon] {
-    font-size: 5rem;
-    color: var(--brand-color);
-}
-</style>
