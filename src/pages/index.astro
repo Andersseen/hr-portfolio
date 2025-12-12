@@ -3,15 +3,15 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.tsx';
 import About from '../components/About.astro';
 import Tech from '../components/Tech';
-import Contact from '../components/Contact.tsx';
+import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 ---
 
-<Layout title="Portfolio">
+<Layout title="Andrii Pap | Senior Full Stack Engineer">
   <main class="relative z-0 bg-neutral-900">
     <Hero client:load />
-    <About  />
+    <About />
     <Tech client:load />
-    <Contact client:load />
+    <Footer />
   </main>
 </Layout>
