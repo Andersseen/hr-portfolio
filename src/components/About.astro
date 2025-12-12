@@ -55,7 +55,7 @@ const services = [
         cursor-pointer shadow-lg border border-white/5
         hover:border-violet-500/50">
         
-        {/* Background Gradient/Image Placeholder */}
+        {/* Background Gradient */}
         <div class="absolute inset-0 bg-gradient-to-br from-violet-900/20 to-indigo-900/20 opacity-50 group-hover/article:opacity-100 transition-opacity duration-500"></div>
 
         <div class="absolute inset-0 text-white z-10 p-6 flex flex-col justify-end overflow-hidden">
@@ -65,12 +65,16 @@ const services = [
              </div>
           </div>
 
-          <div class="relative w-full">
-            <h3 class="text-2xl font-bold mb-2 transform md:translate-y-4 group-hover/article:translate-y-0 transition-transform duration-500 delay-75 whitespace-nowrap overflow-visible">
+          {/* 
+            Title and Text Container 
+            Key Fix: The container is fixed width (w-[300px]) to prevent text reflow during width animation.
+          */}
+          <div class="relative min-w-[300px]"> 
+            <h3 class="text-2xl font-bold mb-2 transform md:translate-y-4 group-hover/article:translate-y-0 transition-transform duration-500 delay-75 whitespace-normal leading-tight max-w-[200px] md:group-hover/article:max-w-full transition-[max-width]">
               {item.title}
             </h3>
             
-            <p class="text-secondary text-sm leading-relaxed opacity-0 md:group-hover/article:opacity-100 transform translate-y-4 md:group-hover/article:translate-y-0 transition-all duration-500 delay-100 min-w-[300px]">
+            <p class="text-secondary text-sm leading-relaxed opacity-0 md:group-hover/article:opacity-100 transform translate-y-4 md:group-hover/article:translate-y-0 transition-all duration-500 delay-100 w-[280px]">
               {item.description}
             </p>
           </div>
