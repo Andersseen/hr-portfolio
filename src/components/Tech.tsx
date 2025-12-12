@@ -3,7 +3,15 @@ import { BallCanvas } from "./canvas/Ball";
 import { technologies } from "../constants";
 import { fadeIn } from "../utils/motion";
 
-const Tech = () => {
+interface TechProps {
+  t: {
+    expertise: string;
+    title: string;
+    desc: string;
+  };
+}
+
+const Tech = ({ t }: TechProps) => {
   return (
     <motion.section
       id="tech"
@@ -15,15 +23,13 @@ const Tech = () => {
     >
       <div className="text-center mb-16">
         <p className="sm:text-[18px] text-[14px] text-secondary uppercase tracking-wider">
-          My Expertise
+          {t.expertise}
         </p>
         <h2 className="text-white font-black md:text-[60px] sm:text-[50px] xs:text-[40px] text-[30px]">
-          Technologies
+          {t.title}
         </h2>
         <p className="mt-4 text-secondary text-[17px] max-w-3xl mx-auto leading-[30px]">
-          I work with a diverse set of modern tools to build robust
-          applications. My primary focus is on the JavaScript/TypeScript
-          ecosystem for full-stack development.
+          {t.desc}
         </p>
       </div>
 

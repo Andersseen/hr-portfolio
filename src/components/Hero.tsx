@@ -2,7 +2,20 @@ import { motion } from "framer-motion";
 import { fadeIn } from "../utils/motion";
 import Scene from "./particles/scene";
 
-const Hero = () => {
+interface HeroProps {
+  t: {
+    available: string;
+    role: string;
+    titleMain: string;
+    titleHighlight: string;
+    desc: string;
+    exp: string;
+    projects: string;
+    commitment: string;
+  };
+}
+
+const Hero = ({ t }: HeroProps) => {
   return (
     <section className="relative w-full h-screen mx-auto">
       <Scene />
@@ -15,43 +28,44 @@ const Hero = () => {
         >
           <div className="flex flex-col gap-2 items-center">
             <div className="px-4 py-1.5 rounded-full border border-violet-500/50 bg-violet-500/10 text-violet-300 text-sm font-medium mb-4">
-              Available for New Opportunities
+              {t.available}
             </div>
             <p className="text-[#dfd9ff] font-medium lg:text-xl sm:text-lg xs:text-base text-base">
-              Senior Full Stack Engineer
+              {t.role}
             </p>
             <h1 className="font-black text-white lg:text-[72px] sm:text-[56px] xs:text-[45px] text-[36px] lg:leading-[1.1] mt-2">
-              Building{" "}
+              {t.titleMain.split(" ")[0]}{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-indigo-500">
-                Scalable
+                {t.titleHighlight}
               </span>{" "}
               <br />
-              Digital Solutions
+              {t.titleMain.split(" ").slice(1).join(" ")}
             </h1>
           </div>
 
           <p className="text-[#dfd9ff] font-normal lg:text-[20px] sm:text-[18px] xs:text-[16px] text-[14px] lg:leading-[32px] max-w-2xl mt-4">
-            Hi, I'm Andrii Pap. I specialize in the React and Angular
-            ecosystems, <br className="hidden sm:block" />
-            delivering high-performance web applications with a focus on{" "}
-            <br className="hidden sm:block" />
-            maintainability, architecture, and user experience.
+            {t.desc.split("\n").map((line, i) => (
+              <span key={i}>
+                {line}
+                <br className="hidden sm:block" />
+              </span>
+            ))}
           </p>
 
           <div className="flex flex-row gap-4 mt-8">
             <div className="flex flex-col items-center">
               <span className="font-bold text-white text-2xl">5+</span>
-              <span className="text-secondary text-sm">Years Exp.</span>
+              <span className="text-secondary text-sm">{t.exp}</span>
             </div>
             <div className="w-[1px] h-full bg-secondary/30"></div>
             <div className="flex flex-col items-center">
               <span className="font-bold text-white text-2xl">20+</span>
-              <span className="text-secondary text-sm">Projects</span>
+              <span className="text-secondary text-sm">{t.projects}</span>
             </div>
             <div className="w-[1px] h-full bg-secondary/30"></div>
             <div className="flex flex-col items-center">
               <span className="font-bold text-white text-2xl">100%</span>
-              <span className="text-secondary text-sm">Commitment</span>
+              <span className="text-secondary text-sm">{t.commitment}</span>
             </div>
           </div>
         </motion.div>
