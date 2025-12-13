@@ -17,9 +17,11 @@ interface HeroProps {
 
 const Hero = ({ t }: HeroProps) => {
   return (
-    <section className="relative w-full h-screen mx-auto">
-      <Scene />
-      <div className="absolute xs:top-10 top-32 w-full flex flex-col gap-8 justify-center items-center">
+    <section className="relative w-full h-screen mx-auto flex flex-col justify-center items-center overflow-hidden">
+      <div className="absolute inset-0 w-full h-full">
+        <Scene />
+      </div>
+      <div className="relative z-10 w-full flex flex-col gap-8 justify-center items-center pt-20">
         <motion.div
           variants={fadeIn("down", "spring", 0.3, 0.75)}
           initial="hidden"
