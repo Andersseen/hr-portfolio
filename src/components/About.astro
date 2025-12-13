@@ -45,7 +45,7 @@ const services = [
 
   <div class="group flex max-md:flex-col justify-center gap-4 w-[90%] mx-auto mb-10 mt-3 md:h-[450px] h-auto">
     {services.map((item) => (
-      <article class="bg-tertiary h-[280px] md:h-full group/article relative w-full rounded-3xl overflow-hidden 
+      <article class="bg-tertiary h-[60px] md:h-full group/article relative w-full rounded-3xl overflow-hidden 
         md:w-[22%] md:hover:w-[40%]
         md:group-hover:[&:not(:hover)]:w-[18%] 
         md:group-focus-within:[&:not(:focus-within):not(:hover)]:w-[18%] 
@@ -53,13 +53,15 @@ const services = [
         before:absolute before:inset-x-0 before:bottom-0 before:h-2/3 
         before:bg-gradient-to-t before:from-black/80 before:to-transparent before:transition-opacity 
         cursor-pointer shadow-lg border border-white/5
-        hover:border-violet-500/50">
+        hover:border-violet-500/50
+        [&.active]:h-[280px] [&.active]:border-violet-500/50
+        ">
         
         {/* Background Gradient */}
-        <div class="absolute inset-0 bg-gradient-to-br from-violet-900/20 to-indigo-900/20 opacity-50 group-hover/article:opacity-100 transition-opacity duration-500"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-violet-900/20 to-indigo-900/20 opacity-50 group-hover/article:opacity-100 group-[.active]/article:opacity-100 transition-opacity duration-500"></div>
 
         <div class="absolute inset-0 text-white z-10 p-6 flex flex-col justify-end overflow-hidden">
-          <div class="mb-auto mt-4 transform md:translate-y-8 group-hover/article:translate-y-0 transition-transform duration-500">
+          <div class="mb-auto mt-4 transform md:translate-y-8 group-hover/article:translate-y-0 group-[.active]/article:translate-y-0 transition-transform duration-500">
              <div class="w-14 h-14 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center mb-4 text-violet-400">
                <Icon name={item.icon} class="w-7 h-7 flex-shrink-0" />
              </div>
@@ -70,11 +72,11 @@ const services = [
             Key Fix: The container is fixed width (w-[300px]) to prevent text reflow during width animation.
           */}
           <div class="relative min-w-[300px]"> 
-            <h3 class="text-2xl font-bold mb-2 transform md:translate-y-4 group-hover/article:translate-y-0 transition-transform duration-500 delay-75 whitespace-normal leading-tight max-w-[200px] md:group-hover/article:max-w-full transition-[max-width]">
+            <h3 class="text-2xl font-bold mb-2 transform md:translate-y-4 group-hover/article:translate-y-0 group-[.active]/article:translate-y-0 transition-transform duration-500 delay-75 whitespace-normal leading-tight max-w-[200px] md:group-hover/article:max-w-full transition-[max-width]">
               {item.title}
             </h3>
             
-            <p class="text-secondary text-sm leading-relaxed opacity-0 md:group-hover/article:opacity-100 transform translate-y-4 md:group-hover/article:translate-y-0 transition-all duration-500 delay-100 w-[280px]">
+            <p class="text-secondary text-sm leading-relaxed opacity-0 md:group-hover/article:opacity-100 group-[.active]/article:opacity-100 transform translate-y-4 md:group-hover/article:translate-y-0 group-[.active]/article:translate-y-0 transition-all duration-500 delay-100 w-[280px]">
               {item.description}
             </p>
           </div>
@@ -83,3 +85,30 @@ const services = [
     ))}
   </div>
 </section>
+
+<script>
+  // Mobile interaction logic
+  const cards = document.querySelectorAll('.group\\/article');
+  
+  // Set first card as active by default on mobile
+  if (window.innerWidth < 768 && cards.length > 0) {
+      cards[0].classList.add('active');
+  }
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      // Only for mobile
+      if (window.innerWidth >= 768) return;
+
+      const isActive = card.classList.contains('active');
+      
+      // Remove active from all
+      cards.forEach(c => c.classList.remove('active'));
+
+      // Toggle current
+      if (!isActive) {
+        card.classList.add('active');
+      }
+    });
+  });
+</script>
